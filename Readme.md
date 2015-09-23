@@ -57,6 +57,7 @@ npm install && npm run test-watch
 
 ```
 npm run build
+```
 
 ## Testing
 
