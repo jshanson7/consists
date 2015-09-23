@@ -85,4 +85,4 @@ npm run lint
 ```
 
 ## Todo
-- remove lodash dependency
+ - remove lodash dependency
