@@ -1,0 +1,35 @@
+{
+  "name": "compare-unordered-arrays",
+  "version": "1.0.0",
+  "license": "MIT",
+  "description": "Test equality of arrays ignoring order.",
+  "keywords": [
+    "array",
+    "unordered",
+    "compare",
+    "equal"
+  ],
+  "scripts": {
+    "start": "npm run test",
+    "build": "npm run browserify && npm run browserify-test && npm run uglify",
+    "browserify": "./node_modules/.bin/browserify compareUnorderedArrays.js > dist/compareUnorderedArrays.js -s compareUnorderedArrays",
+    "browserify-test": "./node_modules/.bin/browserify test/test.js > test/test.browser.js",
+    "uglify": "./node_modules/.bin/uglifyjs ./dist/compareUnorderedArrays.js -o dist/compareUnorderedArrays.min.js",
+    "test": "npm run lint && ./node_modules/.bin/mocha test/test",
+    "test-watch": "npm run lint && ./node_modules/.bin/mocha test/test --watch",
+    "lint": "node_modules/.bin/eslint *.js"
+  },
+  "author": "Jeff Hanson",
+  "dependencies": {
+    "lodash": "^3.10.1",
+  },
+  "devDependencies": {
+    "browserify": "^11.1.0",
+    "eslint": "^1.5.0",
+    "mocha": "^2.3.3",
+    "uglify-js": "^2.4.24"
+  },
+  "engines": {
+    "node": ">=v4.1.0"
+  }
+}
