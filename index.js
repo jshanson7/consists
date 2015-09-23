@@ -1,4 +1,6 @@
-// compare any number of arrays ignoring order, must handle:
+module.exports = compareUnorderedArrays;
+
+// Compares any number of arrays ignoring order; handles
 //  - arrays with multiple equivalent values
 //  - non-primitive array value types -- meaning we can't just build
 //      up a hash of array values as keys (hash[arr[index]] = ++count)
@@ -7,9 +9,9 @@
 //      var nonPrimitive = { a:'b' };
 //      hash[nonPrimitive] = 1;
 //      console.log(hash); // => {[object Object]: 1}
-
-module.exports = compareUnorderedArrays;
-
+// 
+// @param {...Array} [arrays] The arrays to compare.
+// @returns {boolean} Returns `true` if all unordered arrays are equivalent.
 function compareUnorderedArrays() {
   var first = arguments[0];
   var rest = Array.prototype.slice.call(arguments, 1);
