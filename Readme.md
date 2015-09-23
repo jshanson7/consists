@@ -83,3 +83,6 @@ npm run build && open test/test.html
 ```
 npm run lint
 ```
+
+## Todo
+- remove lodash dependency
