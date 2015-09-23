@@ -2,8 +2,6 @@
 var every = require('lodash/collection/every');
 var without = require('lodash/array/without');
 
-module.exports = compareUnorderedArrays;
-
 // compare any number of arrays ignoring order, must handle:
 //  - arrays with multiple equivalent values
 //  - non-primitive array value types -- meaning we can't just build
@@ -14,7 +12,7 @@ module.exports = compareUnorderedArrays;
 //      hash[nonPrimitive] = 1;
 //      console.log(hash); // => {[object Object]: 1}
 
-function compareUnorderedArrays() {
+module.exports = function compareUnorderedArrays() {
   var first = arguments[0];
   var rest = Array.prototype.slice.call(arguments, 1);
   var initialFirstLength = first.length;
