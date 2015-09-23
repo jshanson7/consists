@@ -18,7 +18,7 @@ compareUnorderedArrays([a, b, c], [c, a, b]);
 // => true
 
 compareUnorderedArrays([a, b, c], [a2, b, c]);
-// => true
+// => false
 ```
 
 ## Installation
