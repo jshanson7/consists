@@ -1,6 +1,6 @@
 # Compare Unordered Arrays
 
-Compare arrays ignoring order. Handles:
+Test equality of arrays ignoring order. Handles:
  - 2 or more arrays
  - arrays with multiple equivalent values
  - non-primitive array value types (uses [SameValueZero](http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero) for equality comparisons)
