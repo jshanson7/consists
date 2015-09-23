@@ -93,9 +93,6 @@ function indexOfNaN(array) {
 }
 
 },{}],2:[function(require,module,exports){
-module.exports = require('./compareUnorderedArrays.js');
-
-},{"./compareUnorderedArrays.js":1}],3:[function(require,module,exports){
 // http://wiki.commonjs.org/wiki/Unit_Testing/1.0
 //
 // THIS IS NOT TESTED NOR LIKELY TO WORK OUTSIDE V8!
@@ -456,7 +453,7 @@ var objectKeys = Object.keys || function (obj) {
   return keys;
 };
 
-},{"util/":7}],4:[function(require,module,exports){
+},{"util/":6}],3:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -481,7 +478,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],5:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -574,14 +571,14 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],6:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],7:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 (function (process,global){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -1171,7 +1168,7 @@ function hasOwnProperty(obj, prop) {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":6,"_process":5,"inherits":4}],8:[function(require,module,exports){
+},{"./support/isBuffer":5,"_process":4,"inherits":3}],7:[function(require,module,exports){
 var assert = require('assert');
 var compareUnorderedArrays = require('../');
 
@@ -1225,4 +1222,4 @@ describe('compareUnorderedArrays', function () {
   });
 });
 
-},{"../":2,"assert":3}]},{},[8]);
+},{"../":1,"assert":2}]},{},[7]);
