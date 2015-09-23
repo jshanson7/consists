@@ -26,7 +26,7 @@ compareUnorderedArrays([a, b, c], [a2, b, c]);
 ```
 npm install compareUnorderedArrays --save
 ```
-then either `require` it or add `/dist/compareUnorderedArrays.min.js` to your html.
+or add `/dist/compareUnorderedArrays.min.js` to your html.
 
 ## Usage
 
