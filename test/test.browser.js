@@ -43,7 +43,7 @@ function compareUnorderedArrays() {
     if (!lengthsEqual) { return false; }
   }
   return true;
-};
+}
 
 function without() {
   var arr = arguments[0].slice();
@@ -52,7 +52,7 @@ function without() {
   var valueToRemove;
   var indexOfValueToRemove;
 
-  while (numberOfValuesToRemove > 0 && arr.length) {
+  while (numberOfValuesToRemove && arr.length) {
     valueToRemove = valuesToRemove[--numberOfValuesToRemove];
     while ((indexOfValueToRemove = indexOf(arr, valueToRemove)) !== -1) {
       arr.splice(indexOfValueToRemove, 1);
@@ -61,6 +61,7 @@ function without() {
   return arr;
 }
 
+// simplified lodash indexOf, uses SameValueZero
 function indexOf(array, value) {
   var length = array.length;
 
