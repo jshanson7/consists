@@ -1,6 +1,6 @@
 {
   "name": "compare-unordered-arrays",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "license": "MIT",
   "description": "Test equality of arrays ignoring order.",
   "keywords": [

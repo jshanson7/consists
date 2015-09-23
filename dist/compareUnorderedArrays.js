@@ -1,16 +1,20 @@
 (function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.compareUnorderedArrays = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-// compare any number of arrays ignoring order, must handle:
-//  - arrays with multiple equivalent values
-//  - non-primitive array value types -- meaning we can't just build
-//      up a hash of array values as keys (hash[arr[index]] = ++count)
-//      since non-primitives get converted to '[object Object]', ex:
-//      var hash = {};
-//      var nonPrimitive = { a:'b' };
-//      hash[nonPrimitive] = 1;
-//      console.log(hash); // => {[object Object]: 1}
-
 module.exports = compareUnorderedArrays;
 
+/**
+ * Compares any number of arrays ignoring order; handles
+ *  - arrays with multiple equivalent values
+ *  - non-primitive array value types -- meaning we can't just build
+ *      up a hash of array values as keys (hash[arr[index]] = ++count)
+ *      since non-primitives get converted to '[object Object]', ex:
+ *      var hash = {};
+ *      var nonPrimitive = { a:'b' };
+ *      hash[nonPrimitive] = 1;
+ *      console.log(hash); // => {[object Object]: 1}
+ *
+ * @param {...Array} [arrays] The arrays to compare.
+ * @returns {boolean} Returns `true` if all unordered arrays are equivalent.
+ */
 function compareUnorderedArrays() {
   var first = arguments[0];
   var rest = Array.prototype.slice.call(arguments, 1);
