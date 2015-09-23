@@ -70,9 +70,8 @@ npm run test-watch
 ```
 Browser:
 ```
-npm run build
+npm run build && open test/test.html
 ```
-then open test/test.html in your browser.
 
 ## Linting
 
