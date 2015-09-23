@@ -1,5 +1,9 @@
 # Compare Unordered Arrays
 
+Compare any number of arrays ignoring order, can handle:
+ - arrays with multiple equivalent values
+ - non-primitive array value types (uses [SameValueZero](http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero) for equality comparisons)
+
 ```javascript
 var compareUnorderedArrays = require('compare-unordered-arrays');
 
