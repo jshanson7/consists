@@ -1,7 +1,7 @@
 # Compare Unordered Arrays
 
 ```javascript
-var compareUnorderedArrays = require('compareUnorderedArrays');
+var compareUnorderedArrays = require('compare-unordered-arrays');
 
 compareUnorderedArrays([1,1,2,3], [3,1,2,1], [2,1,3,1]);
 // => true
@@ -41,7 +41,7 @@ compareUnorderedArrays([1,1,2,3], [3,1,2,1], [2,1,3,1]);
 Node:
 
 ```javascript
-var compareUnorderedArrays = require('compareUnorderedArrays');
+var compareUnorderedArrays = require('compare-unordered-arrays');
 compareUnorderedArrays([1,1,2,3], [3,1,2,1], [2,1,3,1]);
 // => true
 ```
