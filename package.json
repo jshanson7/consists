@@ -18,6 +18,7 @@
     "uglify": "./node_modules/.bin/uglifyjs ./dist/compareUnorderedArrays.js -o dist/compareUnorderedArrays.min.js",
     "test": "npm run lint && ./node_modules/.bin/mocha test/test",
     "test-watch": "npm run lint && ./node_modules/.bin/mocha test/test --watch",
+    "test-browser": "npm run lint && ./node_modules/.bin/mocha test/test && open test/test.html",
     "lint": "node_modules/.bin/eslint *.js"
   },
   "main": "index.js",
