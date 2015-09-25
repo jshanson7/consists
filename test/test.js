@@ -11,6 +11,17 @@ var g = [];
 var h = [];
 
 describe('compareUnorderedArrays', function () {
+  describe('base case', function () {
+    it('should return true for zero arguments', () => {
+      assert(compareUnorderedArrays());
+    });
+
+    it('should return false for one argument', () => {
+      assert(!compareUnorderedArrays([]));
+      assert(!compareUnorderedArrays([1,2,3]));
+    });
+  });
+
   describe('empty arrays', function () {
     it('should return true for empty arrays', function () {
       assert(compareUnorderedArrays([], []));

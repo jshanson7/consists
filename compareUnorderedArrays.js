@@ -1,52 +1,45 @@
 module.exports = compareUnorderedArrays;
 
 /**
- * Compares any number of arrays ignoring order; handles
+ * Tests if arrays consist of the same members; handles
  *  - arrays with multiple equivalent values
- *  - non-primitive array value types -- meaning we can't just build
- *      up a hash of array values as keys (hash[arr[index]] = ++count)
- *      since non-primitives get converted to '[object Object]', ex:
- *      var hash = {};
- *      var nonPrimitive = { a:'b' };
- *      hash[nonPrimitive] = 1;
- *      console.log(hash); // => {[object Object]: 1}
+ *  - non-primitive array value types
  *
  * @param {...Array} [arrays] The arrays to compare.
  * @returns {boolean} Returns `true` if all unordered arrays are equivalent.
  */
+
 function compareUnorderedArrays() {
-  var first = arguments[0];
-  var rest = Array.prototype.slice.call(arguments, 1);
-  var initialFirstLength = first.length;
-  var initialLengthsEqual = rest.every(function (arr) {
-    return arr.length === initialFirstLength;
+  var arrays = Array.prototype.slice.call(arguments);
+
+  if (!arrays.length) { return true; }
+  if (arrays.length === 1) { return false; }
+  if (!arrays.every(function (array) { return array.constructor === Array; })) {
+    return false;
+  }
+
+  var value;
+  var firstArray = arrays[0];
+  var others = arrays.slice(1);
+  var length = firstArray.length;
+  var lengthsEqual = others.every(function (other) {
+    return length === other.length;
   });
 
-  if (!initialLengthsEqual) { return false; }
+  if (!lengthsEqual) { return false; }
 
-  var currentFirstVal;
-  var currentFirstLength;
-  var currentRestArr;
-  var lengthsEqual;
-
-  // for each value of 'first', iteratively remove all instances
-  // of the value from each array while testing if the resulting
-  // arrays are equal in length
-  // if any two resulting arrays differ in length, they contain
-  // different numbers of the value, and are not equivalent
-  while (first.length > 0) {
-    currentFirstVal = first[0];
-    first = without(first, currentFirstVal);
-    currentFirstLength = first.length;
-    lengthsEqual = rest.every(function (arr, index) {
-      rest[index] = currentRestArr = without(arr, currentFirstVal);
-      return currentRestArr.length === currentFirstLength;
+  while (length > 0) {
+    firstArray = without(firstArray, value = firstArray[0]);
+    length = firstArray.length;
+    lengthsEqual = others.every(function (other, index) {
+      return length === (others[index] = without(other, value)).length;
     });
 
     if (!lengthsEqual) { return false; }
   }
   return true;
 }
+
 
 function without() {
   var arr = arguments[0].slice();
