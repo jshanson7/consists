@@ -52,6 +52,16 @@ consists([1,1,2,3], [3,1,2,1], [2,1,3,1]);
 // => true
 ```
 
+Lodash mixin:
+
+```javascript
+
+var _ = require('lodash');
+_.mixin({ 'consists': require('consists') });
+_.consists([1,1,2,3], [3,1,2,1], [2,1,3,1]);
+
+```
+
 ## Contributing
 
 Clone repo, cd into it, then

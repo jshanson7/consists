@@ -1,6 +1,6 @@
 {
   "name": "consists",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "license": "MIT",
   "description": "Test if arrays consist of the same members.",
   "keywords": [
