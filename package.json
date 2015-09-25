@@ -1,6 +1,6 @@
 {
   "name": "consists",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "license": "MIT",
   "description": "Test if collections consist of the same members.",
   "keywords": [
