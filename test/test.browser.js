@@ -1,53 +1,46 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-module.exports = compareUnorderedArrays;
+module.exports = consists;
 
 /**
- * Compares any number of arrays ignoring order; handles
+ * Tests if arrays consist of the same members; handles
  *  - arrays with multiple equivalent values
- *  - non-primitive array value types -- meaning we can't just build
- *      up a hash of array values as keys (hash[arr[index]] = ++count)
- *      since non-primitives get converted to '[object Object]', ex:
- *      var hash = {};
- *      var nonPrimitive = { a:'b' };
- *      hash[nonPrimitive] = 1;
- *      console.log(hash); // => {[object Object]: 1}
+ *  - non-primitive array value types
  *
  * @param {...Array} [arrays] The arrays to compare.
  * @returns {boolean} Returns `true` if all unordered arrays are equivalent.
  */
-function compareUnorderedArrays() {
-  var first = arguments[0];
-  var rest = Array.prototype.slice.call(arguments, 1);
-  var initialFirstLength = first.length;
-  var initialLengthsEqual = rest.every(function (arr) {
-    return arr.length === initialFirstLength;
+
+function consists() {
+  var arrays = Array.prototype.slice.call(arguments);
+
+  if (!arrays.length) { return true; }
+  if (arrays.length === 1) { return false; }
+  if (!arrays.every(function (array) { return array.constructor === Array; })) {
+    return false;
+  }
+
+  var value;
+  var firstArray = arrays[0];
+  var others = arrays.slice(1);
+  var length = firstArray.length;
+  var lengthsEqual = others.every(function (other) {
+    return length === other.length;
   });
 
-  if (!initialLengthsEqual) { return false; }
+  if (!lengthsEqual) { return false; }
 
-  var currentFirstVal;
-  var currentFirstLength;
-  var currentRestArr;
-  var lengthsEqual;
-
-  // for each value of 'first', iteratively remove all instances
-  // of the value from each array while testing if the resulting
-  // arrays are equal in length
-  // if any two resulting arrays differ in length, they contain
-  // different numbers of the value, and are not equivalent
-  while (first.length > 0) {
-    currentFirstVal = first[0];
-    first = without(first, currentFirstVal);
-    currentFirstLength = first.length;
-    lengthsEqual = rest.every(function (arr, index) {
-      rest[index] = currentRestArr = without(arr, currentFirstVal);
-      return currentRestArr.length === currentFirstLength;
+  while (length > 0) {
+    firstArray = without(firstArray, value = firstArray[0]);
+    length = firstArray.length;
+    lengthsEqual = others.every(function (other, index) {
+      return length === (others[index] = without(other, value)).length;
     });
 
     if (!lengthsEqual) { return false; }
   }
   return true;
 }
+
 
 function without() {
   var arr = arguments[0].slice();
@@ -1174,7 +1167,7 @@ function hasOwnProperty(obj, prop) {
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"./support/isBuffer":5,"_process":4,"inherits":3}],7:[function(require,module,exports){
 var assert = require('assert');
-var compareUnorderedArrays = require('../');
+var consists = require('../');
 
 var a = { a: 'a' };
 var b = { a: 'a' };
@@ -1185,27 +1178,38 @@ var f = new Date();
 var g = [];
 var h = [];
 
-describe('compareUnorderedArrays', function () {
+describe('consists', function () {
+  describe('base case', function () {
+    it('should return true for zero arguments', () => {
+      assert(consists());
+    });
+
+    it('should return false for one argument', () => {
+      assert(!consists([]));
+      assert(!consists([1,2,3]));
+    });
+  });
+
   describe('empty arrays', function () {
     it('should return true for empty arrays', function () {
-      assert(compareUnorderedArrays([], []));
-      assert(compareUnorderedArrays([], [], []));
+      assert(consists([], []));
+      assert(consists([], [], []));
     });
   });
 
   describe('primitives', function () {
     it('should return true equivalent arrays with primitives', function () {
-      assert(compareUnorderedArrays([1,1,2,3], [3,1,2,1], [2,1,3,1]));
-      assert(compareUnorderedArrays(['a','a','b','c'], ['b','a','a','c']));
-      assert(compareUnorderedArrays(
+      assert(consists([1,1,2,3], [3,1,2,1], [2,1,3,1]));
+      assert(consists(['a','a','b','c'], ['b','a','a','c']));
+      assert(consists(
         [true,'a',false,'c',0,true, undefined,0,-0,NaN,'a',1,2,-1,false],
         [0,2,undefined,true,-1,0,NaN,'a',1,-0,false,true,false,'c','a']
       ));
     });
     it('should return false inequivalent arrays with primitives', function () {
-      assert(!compareUnorderedArrays([1,1,2,3], [1,2,3,3]));
-      assert(!compareUnorderedArrays(['a','a','b','c'], ['a','b','c']));
-      assert(!compareUnorderedArrays(
+      assert(!consists([1,1,2,3], [1,2,3,3]));
+      assert(!consists(['a','a','b','c'], ['a','b','c']));
+      assert(!consists(
         [true,'a',undefined,false,'c',0,true,0,-0,NaN,'a',1,2,-1,false],
         [0,2,true,-1,0,NaN,'a',1,-0,false,false,'c','a',undefined]
       ));
@@ -1214,14 +1218,14 @@ describe('compareUnorderedArrays', function () {
 
   describe('non-primitives', function () {
     it('should return true equivalent arrays with non-primitives', function () {
-      assert(compareUnorderedArrays([a,b,c,d,e,f,g,h], [h,a,g,c,b,f,e,d]));
-      assert(compareUnorderedArrays([a,a,b], [a,b,a]));
-      assert(compareUnorderedArrays([a,h,h], [h,a,h]));
+      assert(consists([a,b,c,d,e,f,g,h], [h,a,g,c,b,f,e,d]));
+      assert(consists([a,a,b], [a,b,a]));
+      assert(consists([a,h,h], [h,a,h]));
     });
     it('should return false inequivalent arrays with non-primitives', function () {
-      assert(!compareUnorderedArrays([a,a,b,c,d,e,f,g,h], [h,a,g,c,b,b,f,e,d]));
-      assert(!compareUnorderedArrays([d,e], [d,d]));
-      assert(!compareUnorderedArrays([g,h], [g,g]));
+      assert(!consists([a,a,b,c,d,e,f,g,h], [h,a,g,c,b,b,f,e,d]));
+      assert(!consists([d,e], [d,d]));
+      assert(!consists([g,h], [g,g]));
     });
   });
 });

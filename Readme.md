@@ -1,18 +1,18 @@
-# Compare Unordered Arrays
+# Consists
 
-Test equality of arrays ignoring order. Handles:
+Test if arrays consist of the same members. Handles:
  - 2 or more arrays
  - arrays with multiple equivalent values
  - primitive & non-primitive array value types (uses [SameValueZero](http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero) for equality comparisons)
  - `NaN` values
 
 ```javascript
-var compareUnorderedArrays = require('compare-unordered-arrays');
+var consists = require('consists');
 
-compareUnorderedArrays([1,1,2,3], [3,1,2,1], [2,1,3,1]);
+consists([1,1,2,3], [3,1,2,1], [2,1,3,1]);
 // => true
 
-compareUnorderedArrays([1,1,2,3], [3,1,2]);
+consists([1,1,2,3], [3,1,2]);
 // => false
 
 var a = { a: 'a' };
@@ -20,35 +20,35 @@ var b = { b: 'b' };
 var c = { c: 'c' };
 var a2 = { a: 'a' };
 
-compareUnorderedArrays([a, b, c], [c, a, b]);
+consists([a, b, c], [c, a, b]);
 // => true
 
-compareUnorderedArrays([a, b, c], [a2, b, c]);
+consists([a, b, c], [a2, b, c]);
 // => false
 ```
 
 ## Installation
 
 ```
-npm install compareUnorderedArrays --save
+npm install consists --save
 ```
-or add `/dist/compareUnorderedArrays.min.js` to your html.
+or add `/dist/consists.min.js` to your html.
 
 ## Usage
 
 Browser:
 
 ```javascript
-var compareUnorderedArrays = window.compareUnorderedArrays;
-compareUnorderedArrays([1,1,2,3], [3,1,2,1], [2,1,3,1]);
+var consists = window.consists;
+consists([1,1,2,3], [3,1,2,1], [2,1,3,1]);
 // => true
 ```
 
 Node:
 
 ```javascript
-var compareUnorderedArrays = require('compare-unordered-arrays');
-compareUnorderedArrays([1,1,2,3], [3,1,2,1], [2,1,3,1]);
+var consists = require('consists');
+consists([1,1,2,3], [3,1,2,1], [2,1,3,1]);
 // => true
 ```
 

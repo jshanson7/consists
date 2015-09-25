@@ -1,4 +1,4 @@
-module.exports = compareUnorderedArrays;
+module.exports = consists;
 
 /**
  * Tests if arrays consist of the same members; handles
@@ -9,7 +9,7 @@ module.exports = compareUnorderedArrays;
  * @returns {boolean} Returns `true` if all unordered arrays are equivalent.
  */
 
-function compareUnorderedArrays() {
+function consists() {
   var arrays = Array.prototype.slice.call(arguments);
 
   if (!arrays.length) { return true; }
