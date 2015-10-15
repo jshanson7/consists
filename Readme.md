@@ -1,4 +1,4 @@
-# Consists
+# Consists [![NPM version][npm-image]][npm-url] [![Build status][travis-image]][travis-url]
 
 Test if arrays consist of the same members. Handles:
  - 2 or more arrays
@@ -94,3 +94,8 @@ npm run build && open test/test.html
 ```
 npm run lint
 ```
+
+[npm-image]: https://badge.fury.io/js/consists.svg
+[npm-url]: https://npmjs.org/package/consists
+[travis-image]: https://travis-ci.org/jshanson7/consists.svg
+[travis-url]: https://travis-ci.org/jshanson7/consists
