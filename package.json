@@ -1,8 +1,36 @@
 {
   "name": "consists",
   "version": "1.0.14",
+  "description": "Test if arrays consist of the same members.",
+  "author": "Jeff Hanson",
   "license": "MIT",
-  "description": "Test if collections consist of the same members.",
+  "scripts": {
+    "build": "make build",
+    "lint": "make lint",
+    "test": "make lint && make build-test"
+  },
+  "main": "lib/index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "babel-cli": "^6.22.2",
+    "babel-eslint": "^7.1.1",
+    "babel-preset-latest": "^6.22.0",
+    "babel-preset-react": "^6.22.0",
+    "babel-preset-stage-0": "^6.22.0",
+    "babelify": "^7.3.0",
+    "eslint": "^3.14.1",
+    "eslint-config-airbnb": "^14.0.0",
+    "eslint-plugin-babel": "^4.0.1",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^3.0.2",
+    "eslint-plugin-react": "^6.9.0",
+    "mochify": "^2.18.1",
+    "phantomjs": "^2.1.7"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jshanson7/consists.git"
+  },
   "keywords": [
     "consists",
     "array",
@@ -10,33 +38,5 @@
     "compare",
     "equal",
     "lodash"
-  ],
-  "author": "Jeff Hanson",
-  "scripts": {
-    "start": "npm run test",
-    "postinstall": "npm run build",
-    "build": "npm run browserify && npm run browserify-test && npm run uglify",
-    "browserify": "./node_modules/.bin/browserify consists.js > dist/consists.js -s consists",
-    "browserify-test": "./node_modules/.bin/browserify test/test.js > test/test.browser.js",
-    "uglify": "./node_modules/.bin/uglifyjs ./dist/consists.js -o dist/consists.min.js",
-    "test": "npm run lint && npm run build && ./node_modules/.bin/mocha test/test",
-    "test-watch": "npm run lint && npm run build && ./node_modules/.bin/mocha test/test --watch",
-    "test-browser": "npm run lint && npm run build && ./node_modules/.bin/mocha test/test && open test/test.html",
-    "lint": "node_modules/.bin/eslint *.js"
-  },
-  "main": "consists.js",
-  "dependencies": {},
-  "devDependencies": {
-    "browserify": "^11.1.0",
-    "eslint": "^1.5.0",
-    "mocha": "^2.3.3",
-    "uglify-js": "^2.4.24"
-  },
-  "repository" : {
-    "type" : "git",
-    "url" : "https://github.com/jshanson7/consists"
-  },
-  "engines": {
-    "node": ">=v4.1.0"
-  }
+  ]
 }

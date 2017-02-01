@@ -7,7 +7,7 @@ Test if arrays consist of the same members. Handles:
  - `NaN` values
 
 ```javascript
-var consists = require('consists');
+import consists from 'consists';
 
 consists([1,1,2,3], [3,1,2,1], [2,1,3,1]);
 // => true
@@ -15,10 +15,10 @@ consists([1,1,2,3], [3,1,2,1], [2,1,3,1]);
 consists([1,1,2,3], [3,1,2]);
 // => false
 
-var a = { a: 'a' };
-var b = { b: 'b' };
-var c = { c: 'c' };
-var a2 = { a: 'a' };
+const a = { a: 'a' };
+const b = { b: 'b' };
+const c = { c: 'c' };
+const a2 = { a: 'a' };
 
 consists([a, b, c], [c, a, b]);
 // => true
@@ -30,24 +30,14 @@ consists([a, b, c], [a2, b, c]);
 ## Installation
 
 ```
-npm install consists --save
+npm i --save consists
 ```
-or add `/dist/consists.min.js` to your html.
 
 ## Usage
 
-Browser:
-
 ```javascript
-var consists = window.consists;
-consists([1,1,2,3], [3,1,2,1], [2,1,3,1]);
-// => true
-```
+import consists from 'consists';
 
-Node:
-
-```javascript
-var consists = require('consists');
 consists([1,1,2,3], [3,1,2,1], [2,1,3,1]);
 // => true
 ```
@@ -55,45 +45,17 @@ consists([1,1,2,3], [3,1,2,1], [2,1,3,1]);
 Lodash mixin:
 
 ```javascript
+import _ from 'lodash';
+import consists from 'consists';
 
-var _ = require('lodash');
-_.mixin({ 'consists': require('consists') });
+_.mixin({consists});
 _.consists([1,1,2,3], [3,1,2,1], [2,1,3,1]);
 // => true
 ```
 
-## Contributing
+## License
 
-Clone repo, cd into it, then
-```
-npm install && npm run test-watch
-```
-
-## Building
-
-```
-npm run build
-```
-
-## Testing
-
-```
-npm test
-```
-For live retesting:
-```
-npm run test-watch
-```
-Browser:
-```
-npm run build && open test/test.html
-```
-
-## Linting
-
-```
-npm run lint
-```
+MIT
 
 [npm-image]: https://badge.fury.io/js/consists.svg
 [npm-url]: https://npmjs.org/package/consists

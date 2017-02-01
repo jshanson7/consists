@@ -1,14 +1,14 @@
-var assert = require('assert');
-var consists = require('../');
+import assert from 'assert';
+import consists from '../';
 
-var a = { a: 'a' };
-var b = { a: 'a' };
-var c = ['a','b'];
-var d = function () {};
-var e = function () {};
-var f = new Date();
-var g = [];
-var h = [];
+const a = { a: 'a' };
+const b = { a: 'a' };
+const c = ['a','b'];
+const d = function () {};
+const e = function () {};
+const f = new Date();
+const g = [];
+const h = [];
 
 describe('consists', function () {
   describe('base case', function () {
@@ -16,9 +16,9 @@ describe('consists', function () {
       assert(consists());
     });
 
-    it('should return false for one argument', () => {
-      assert(!consists([]));
-      assert(!consists([1,2,3]));
+    it('should return true for one argument', () => {
+      assert(consists([]));
+      assert(consists([1,2,3]));
     });
   });
 
